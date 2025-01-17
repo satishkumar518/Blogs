@@ -1,5 +1,6 @@
 //use express
 const express=require('express')
+const { blogs } = require('./model/index')
 const app=express()
 
 // import index file inside the model
@@ -13,16 +14,25 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 // create api 
-app.get('/',(req,res)=>{
-    res.render('home')
+app.get('/',async(req,res)=>{
+    const allBlog =await blogs.findAll()
+    
+    res.render('home', {blogs:allBlog})
 })
 app.get('/createblog',(req,res)=>{
     res.render('createblog')
 })
 
-app.post('/createblog',(req,res)=>{
-    console.log(req.body)
-    res.send('data submited successfully')
+app.post('/createblog',async(req,res)=>{
+    const title = req.body.title
+    const subtitle =req.body.subtitle
+    const description = req.body.description
+    await blogs.create({
+        title : title,
+        subtitle : subtitle,
+        description : description
+    })
+    res.send("data submitted successfully")
 })
 
 // port to run project

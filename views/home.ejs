@@ -111,29 +111,17 @@
     <h1 style="text-align: center; color: #4CAF50;">Blogs</h1>
     <div class="cards">
       <!-- Card 1 -->
-      <div class="card">
-        <h3>Web Development</h3>
-        <h4>Build Modern Websites</h4>
-        <p>
-          We create fast, responsive, and user-friendly websites tailored to your business needs.
-        </p>
-      </div>
-      <!-- Card 2 -->
-      <div class="card">
-        <h3>Graphic Design</h3>
-        <h4>Creative Visuals</h4>
-        <p>
-          Bring your ideas to life with our stunning graphic designs for web, print, and branding.
-        </p>
-      </div>
-      <!-- Card 3 -->
-      <div class="card">
-        <h3>SEO Optimization</h3>
-        <h4>Improve Search Rankings</h4>
-        <p>
-          Enhance your online visibility and attract more customers with our SEO strategies.
-        </p>
-      </div>
+       <% blogs.forEach((blog)=>{  %>
+        <div class="card">
+          <h3><%- blog.title %></h3>
+          <h4><%- blog.subtitle %></h4>
+          <p>
+            <%- blog.description %>
+          </p>
+        </div>
+            
+      <% }) %>
+      
     </div>
   </div>
 
