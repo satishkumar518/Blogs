@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
+  <title>Single Blog View</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       line-height: 1.6;
+      color: #333;
     }
 
     /* Navbar Styles */
@@ -36,48 +37,49 @@
       font-weight: bold;
     }
 
-    /* Main Section */
-    .container {
-      max-width: 1200px;
+    /* Blog Section */
+    .blog-container {
+      max-width: 800px;
       margin: 2rem auto;
-      padding: 0 1rem;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .card {
-      background-color: #fff;
+      padding: 1rem;
       border: 1px solid #ddd;
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      padding: 1rem;
-      transition: transform 0.2s ease;
+      background-color: #fff;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
+    .blog-title {
+      font-size: 2rem;
       color: #4CAF50;
-    }
-
-    .card h4 {
-      font-size: 1.2rem;
       margin-bottom: 0.5rem;
-      color: #555;
     }
 
-    .card p {
+    .blog-subtitle {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    .blog-author {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 1.5rem;
+    }
+
+    .blog-content {
       font-size: 1rem;
-      color: #666;
-      line-height: 1.5;
+      line-height: 1.8;
+      color: #444;
+    }
+
+    .blog-content p {
+      margin-bottom: 1rem;
+    }
+
+    .blog-content img {
+      max-width: 100%;
+      margin: 1rem 0;
+      border-radius: 8px;
     }
 
     /* Footer Styles */
@@ -100,35 +102,25 @@
     <div class="logo">CMS</div>
     <div>
       <a href="/">Home</a>
-      <a href="/createblog">Create Blogs</a>
-      <a href="#">Services</a>
       <a href="#">Contact</a>
     </div>
   </nav>
 
-  <!-- Main Content -->
-  <div class="container">
-    <h1 style="text-align: center; color: #4CAF50;">Blogs</h1>
-    <div class="cards">
-      <!-- Card 1 -->
-       <% blogs.forEach((blog)=>{  %>
-        <div class="card">
-          <h3><%- blog.title %></h3>
-          <h4><%- blog.subtitle %></h4>
-          <p>
-            <%- blog.description %>
-          </p>
-          <a href="/read/<%- blog.id %>">Read more</a>
-        </div>
-            
-      <% }) %>
-      
+  <!-- Blog Content -->
+  <div class="blog-container">
+    <h1 class="blog-title"><%- singleBlog[0].title %></h1>
+    <h2 class="blog-subtitle"><%- singleBlog[0].subtitle %></h2>
+    <p class="blog-author">By <%- singleBlog[0].title %> | <%- singleBlog[0].createdAt %></p>
+    <div class="blog-content">
+      <p><%- singleBlog[0].description %></p>
     </div>
+    <button><a href="/edit/<%- singleBlog[0].id %>" style="text-decoration: none;">Edit</a></button>
+    <button><a href="/delete/<%- singleBlog[0].id %>" style="text-decoration: none;">Delete</a></button>
   </div>
 
   <!-- Footer -->
   <footer>
-    <p>© 2025 MyWebsite. All Rights Reserved Satish kumar chaudhary.</p>
+    <p>© 2025 MyBlog. All Rights Reserved.</p>
   </footer>
 </body>
 </html>
