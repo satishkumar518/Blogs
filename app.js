@@ -3,6 +3,7 @@ const express=require('express')
 const { blogs } = require('./model/index')
 const { users } = require('./model/index')
 const { where } = require('sequelize')
+const bcrypt =require('bcryptjs')
 const app=express()
 
 // import index file inside the model
@@ -99,8 +100,8 @@ app.post('/register',async(req,res)=>{
     const {email, password, passwordConfirm}= req.body
     await users.create({
         email : email,
-        password : password,
-        passwordConfirm : passwordConfirm
+        password : bcrypt.hashSync(password,8),
+        passwordConfirm : bcrypt.hashSync(passwordConfirm,8)
     })
 
     res.redirect('/login')
@@ -109,6 +110,11 @@ app.post('/register',async(req,res)=>{
 // login page
 app.get('/login',(req,res)=>{
    res.render('login')
+})
+
+app.post('/login',(req,res)=>{
+    const {email,password} = req.body
+    res.send('submit login form')
 })
 
 
