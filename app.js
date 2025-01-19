@@ -1,6 +1,7 @@
 //use express
 const express=require('express')
 const { blogs } = require('./model/index')
+const { users } = require('./model/index')
 const { where } = require('sequelize')
 const app=express()
 
@@ -61,10 +62,55 @@ app.get('/delete/:id',async(req,res)=>{
 })
 
 // edit blog
-app.get('/edit/:id',(req,res)=>{
- console.log('edit')
+app.get('/edit/:id',async(req,res)=>{
+    const id = req.params.id
+    const data =await blogs.findAll({
+        where : {
+            id : id
+        }
+    })
+  res.render('editform', {data:data})
 
 })
+
+app.post('/edit/:id',async(req,res)=>{
+    const id = req.params.id
+    const title = req.body.title
+    const subtitle = req.body.subtitle 
+    const description = req.body.description
+    await blogs.update({
+        title : title,
+        subtitle : subtitle,
+        description : description
+    },{
+        where :{
+            id : id 
+        }
+    })
+    res.redirect('/')
+})
+
+// register page 
+app.get('/register',(req,res)=>{
+    res.render('register')
+})
+
+app.post('/register',async(req,res)=>{
+    const {email, password, passwordConfirm}= req.body
+    await users.create({
+        email : email,
+        password : password,
+        passwordConfirm : passwordConfirm
+    })
+
+    res.redirect('/login')
+})
+
+// login page
+app.get('/login',(req,res)=>{
+   res.render('login')
+})
+
 
 // port to run project
 app.listen(3000,()=>{

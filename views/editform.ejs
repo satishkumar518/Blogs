@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Form</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      background-color: #4CAF50;
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-size: 1rem;
+    }
+
+    .navbar a:hover {
+      text-decoration: underline;
+    }
+
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    /* Form Section */
+    .form-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    .form-container h1 {
+      font-size: 2rem;
+      color: #4CAF50;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .form-container h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #555;
+      text-align: center;
+    }
+
+    .form-container label {
+      display: block;
+      margin: 1rem 0 0.5rem;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .form-container input,
+    .form-container textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    .form-container textarea {
+      resize: vertical;
+      height: 100px;
+    }
+
+    .form-container button {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .form-container button:hover {
+      background-color: #45a049;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 2rem;
+    }
+
+    footer p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">CMS</div>
+    <div>
+      <a href="/">Home</a>
+    </div>
+  </nav>
+
+  <!-- Form Section -->
+  <div class="form-container">
+    <h1>Edit Blogs</h1>
+    <h2>Fill in the details below:</h2>
+    <form action="/edit/<%- data[0].id %>" method="post">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" value="<%- data[0].title %>"  required>
+
+      <label for="subtitle">Subtitle:</label>
+      <input type="text" id="subtitle" name="subtitle" value="<%- data[0].subtitle %>" required>
+
+      <label for="description">Description:</label>
+      <textarea id="description" name="description"   required><%- data[0].description %></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 MyWebsite. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>

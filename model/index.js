@@ -1,6 +1,7 @@
 const {Sequelize, DataTypes}= require('sequelize')
 const dbConfig = require('../config/dbConfig')
 const makeBlogModel = require('./blogModel')
+const makeUserModel = require('./userModel')
 
 const sequelize= new Sequelize(dbConfig.db,dbConfig.username,dbConfig.password,({
     host : dbConfig.host,
@@ -30,6 +31,9 @@ db.sequelize =sequelize
 
 // create blog model
 db.blogs = makeBlogModel(sequelize,DataTypes)
+
+// create user model 
+db.users = makeUserModel(sequelize,DataTypes)
 
 db.sequelize.sync({force: false}).then(()=>{
     console.log('sync Done')
